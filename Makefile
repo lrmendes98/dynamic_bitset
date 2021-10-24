@@ -5,7 +5,7 @@ PROJ_NAME = main
 OBJS_DIR := obj
 SRCS_DIR := src
 INC_DIR := include
-SRCS_FILES := $(SRCS_DIR)/main.cpp
+SRCS_FILES := $(SRCS_DIR)/main.cpp $(SRCS_DIR)/dynamic_bitset.cpp
 OBJS_FILES = $(patsubst $(SRCS_DIR)/%.cpp,$(OBJS_DIR)/%.o,$(SRCS_FILES))
 
 .PHONY: all clean test
