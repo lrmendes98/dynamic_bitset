@@ -28,27 +28,17 @@ uint64_t dynamic_bitset::to_ullong()
 	return result;
 }
 
-void dynamic_bitset::printBitset() const
+void dynamic_bitset::printBitset()
 {
 	for(size_t i = this->bitset.size(); i > 0; i--) {
 		std::cout << this->bitset[i - 1];
 	}
-	if(this->bitset.size() <= 64) {
-		if(this->bitset.size() > 64) {
-			std::cerr << "Size of bitset: " << this->bitset.size() << std::endl;
-			throw std::overflow_error(
-				"Can't convert to uint64 number larger that uint64_t limit!");
-		}
 
-		uint64_t result = 0;
-		for(size_t i = 0; i < this->bitset.size(); ++i) {
-			result += this->bitset[i] * MASK(i);
-		}
-		std::cout << " -> " << result;
-	}
-	else{
-		std::cout << " Inf ";
-	}
+	if(this->bitset.size() <= 64)
+		std::cout << " -> " << this->to_ullong();
+	else
+		std::cout << "-> Inf ";
+
 	std::cout << std::endl;
 }
 

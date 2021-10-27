@@ -20,7 +20,7 @@ class dynamic_bitset
 	void flip(size_t index);
 	bool test(size_t index);
 	uint64_t to_ullong();
-	void printBitset() const;
+	void printBitset();
 
 	dynamic_bitset operator+(dynamic_bitset b);
 	dynamic_bitset operator+(uint64_t n);
