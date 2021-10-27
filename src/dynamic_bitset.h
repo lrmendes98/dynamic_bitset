@@ -41,6 +41,9 @@ class dynamic_bitset
 	void operator+=(uint64_t n);
 	void operator-=(dynamic_bitset b);
 	void operator-=(uint64_t n);
+	void operator=(dynamic_bitset b);
+	void operator=(uint64_t n);
+
 };
 
 #endif

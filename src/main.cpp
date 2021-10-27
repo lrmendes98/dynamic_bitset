@@ -5,23 +5,14 @@ using namespace std;
 
 int main()
 {
-	uint64_t state1_num = 4;
-	uint64_t state2_num = 3;
-
-	dynamic_bitset bitset1(state1_num);
-	dynamic_bitset bitset2(state2_num);
+	dynamic_bitset bitset1 = 0;
 
 	bitset1.printBitset();
-
 	bitset1.flip(0);
 	bitset1.printBitset();
-	bitset1.flip(5);
-
+	bitset1.flip(1);
 	bitset1.printBitset();
-
-	bitset1 -= bitset2;
-	bitset1.printBitset();
-	bitset1.flip(5);
+	bitset1.flip(2);
 	bitset1.printBitset();
 	// std::cout << bitset1.to_ullong() << std::endl;
 
