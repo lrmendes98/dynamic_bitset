@@ -46,6 +46,9 @@ void dynamic_bitset::printBitset() const
 		}
 		std::cout << " -> " << result;
 	}
+	else{
+		std::cout << " Inf ";
+	}
 	std::cout << std::endl;
 }
 
