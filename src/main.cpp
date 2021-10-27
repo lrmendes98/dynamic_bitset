@@ -10,11 +10,19 @@ int main()
 
 	dynamic_bitset bitset1(state1_num);
 	dynamic_bitset bitset2(state2_num);
-	// bitset1.printBitset();
-	// std::cout << (bitset1 - ~0).to_ullong() << std::endl;
-	// std::cout << bitset1.to_ullong() << std::endl;
+
 	bitset1.printBitset();
-	bitset2.printBitset();
+
+	bitset1.flip(0);
+	bitset1.printBitset();
+	bitset1.flip(5);
+
+	bitset1.printBitset();
+
+	bitset1 -= bitset2;
+	bitset1.printBitset();
+	bitset1.flip(5);
+	bitset1.printBitset();
 	// std::cout << bitset1.to_ullong() << std::endl;
 
 	// std::cout << "state1: " << state1_num << std::endl;
@@ -48,17 +56,17 @@ int main()
 	// else
 	//     std::cout << "\tfalse" << std::endl;
 
-	std::cout << "Equals:" << std::endl;
-	if(bitset1 == bitset2)
-		std::cout << "\ttrue" << std::endl;
-	else
-		std::cout << "\tfalse" << std::endl;
+	// std::cout << "Equals:" << std::endl;
+	// if(bitset1 == bitset2)
+	// 	std::cout << "\ttrue" << std::endl;
+	// else
+	// 	std::cout << "\tfalse" << std::endl;
 
-	std::cout << "Not Equals:" << std::endl;
-	if(bitset1 != bitset2)
-		std::cout << "\ttrue" << std::endl;
-	else
-		std::cout << "\tfalse" << std::endl;
+	// std::cout << "Not Equals:" << std::endl;
+	// if(bitset1 != bitset2)
+	// 	std::cout << "\ttrue" << std::endl;
+	// else
+	// 	std::cout << "\tfalse" << std::endl;
 
 	return 0;
 }
