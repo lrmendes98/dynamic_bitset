@@ -5,15 +5,22 @@ using namespace std;
 
 int main()
 {
-	dynamic_bitset bitset1 = 0;
+	dynamic_bitset bitset1 = 5;
+	dynamic_bitset bitset2 = 0;
 
 	bitset1.printBitset();
-	bitset1.flip(0);
+	(bitset1 - bitset2).printBitset();
 	bitset1.printBitset();
-	bitset1.flip(1);
-	bitset1.printBitset();
-	bitset1.flip(2);
-	bitset1.printBitset();
+
+	dynamic_bitset new1(5);
+	dynamic_bitset new2(0);
+	
+	(new1 - new2).printBitset();
+
+	(new1 - new2).printBitset();
+
+	(new1 - new2).printBitset();
+	
 	// std::cout << bitset1.to_ullong() << std::endl;
 
 	// std::cout << "state1: " << state1_num << std::endl;
