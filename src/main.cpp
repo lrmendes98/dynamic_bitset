@@ -5,20 +5,34 @@ using namespace std;
 
 int main()
 {
-	dynamic_bitset new1(5);
-	dynamic_bitset new2(0);
+	// {
+	// 	dynamic_bitset a1(5);
+	// 	dynamic_bitset a2(0);
 
-	dynamic_bitset aux = new1 - new2;
-	std::cout << "Result: ";
-	aux.printBitset();
+	// 	for(int i = 0; i < 1000; ++i) {
+	// 		dynamic_bitset aux = a1 + a2;
+	// 		if(aux.to_ullong() != 5)
+	// 			cerr << "Error 1" << endl;
+	// 	}
 
-	aux = new1 - new2;
-	std::cout << "Result: ";
-	aux.printBitset();
+	// 	for(int i = 0; i < 1000; ++i) {
+	// 		dynamic_bitset aux = a1 + a2;
+	// 		if(aux.to_ullong() != 5)
+	// 			cerr << "Error 2" << endl;
+	// 	}
+	// }
 
-	aux = new1 - new2;
-	std::cout << "Result: ";
-	aux.printBitset();
+	dynamic_bitset a1 = 5;
+	dynamic_bitset a2 = 3;
+	dynamic_bitset a3 = a1 + a2;
+	// dynamic_bitset a4 = a1 + a2;
+	// dynamic_bitset a5 = a1 + a2;
+
+	// a3.printBitset();
+	// a4.printBitset();
+	// a5.printBitset();
+
+	cout << (a1 + a2).to_ullong() << endl;
 
 	return 0;
 }
