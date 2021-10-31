@@ -18,7 +18,7 @@ void dynamic_bitset::compressBitset()
 void dynamic_bitset::compressBitset(dynamic_bitset* b)
 {
 	size_t aux = b->bitset.size() - 1;
-	while(this->bitset[aux] == 0 && aux > 1) {
+	while(b->bitset[aux] == 0 && aux > 1) {
 		b->bitset.pop_back();
 		--aux;
 	}
@@ -121,7 +121,6 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 		bool sum = (this->bitset[i] ^ b[i]) ^ carry;
 		carry = (this->bitset[i] && b[i]) || (this->bitset[i] && carry) ||
 				(b[i] && carry);
-		cout << this->bitset[i] << " " << b[i] << " " << carry << endl;
 		result.bitset.push_back(sum);
 	}
 
