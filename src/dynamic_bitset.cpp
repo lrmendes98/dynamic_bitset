@@ -141,17 +141,8 @@ dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 	size_t i = 0;
 	bool borrow = false;
 
-	b.printBitset();
-	this->printBitset();
-
 	for(; i < b.bitset.size() || i < this->bitset.size(); ++i) {
 		bool sub = (this->bitset[i] ^ b.bitset[i]) ^ borrow;
-
-		std::cout << "this->bitset[i]: " << this->bitset[i]
-				  << "  b.bitset[i]: " << b.bitset[i] << "  borrow: " << borrow
-				  << std::endl
-				  << std::endl;
-
 		borrow = (!this->bitset[i] && b.bitset[i]) || (!this->bitset[i] && borrow) ||
 				 (b.bitset[i] && borrow);
 		result.bitset.push_back(sub);
