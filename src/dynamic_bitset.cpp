@@ -13,7 +13,7 @@ void dynamic_bitset::compressBitset()
 	return;
 }
 
-void dynamic_bitset::compressBitset(dynamic_bitset *b)
+void dynamic_bitset::compressBitset(dynamic_bitset* b)
 {
 	size_t aux = b->bitset.size() - 1;
 	while(b->bitset[aux] == 0) {
@@ -24,13 +24,13 @@ void dynamic_bitset::compressBitset(dynamic_bitset *b)
 	return;
 }
 
-void dynamic_bitset::normalizeBitsets(dynamic_bitset *b)
+void dynamic_bitset::normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b)
 {
 	// convert both binaries to the same size
-	size_t diff = this->bitset.size() - b->bitset.size();
+	size_t diff = a->bitset.size() - b->bitset.size();
 	if(diff < 0)
 		while(diff > 0) {
-			this->bitset.push_back(0);
+			a->bitset.push_back(0);
 			--diff;
 		}
 	else
@@ -94,11 +94,7 @@ void dynamic_bitset::flip(size_t index)
 	bitset[index] = !bitset[index];
 
 	if(bitset[index] == 0) {
-		size_t aux = this->bitset.size() - 1;
-		while(bitset[aux] == 0) {
-			this->bitset.pop_back();
-			--aux;
-		}
+		this->compressBitset();
 	}
 }
 
@@ -111,6 +107,8 @@ bool dynamic_bitset::test(size_t index)
 
 dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 {
+	normalizeBitsets(this, &b);
+
 	dynamic_bitset result;
 
 	size_t i = 0;
@@ -129,19 +127,15 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 		result.bitset.push_back(sum);
 	}
 
-	return result;
-}
+	compressBitset(&result);
 
-dynamic_bitset dynamic_bitset::operator+(uint64_t n)
-{
-	dynamic_bitset b(n);
-	return *this + b;
+	return result;
 }
 
 dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 {
-	normalizeBitsets(&b);
-	
+	normalizeBitsets(this, &b);
+
 	dynamic_bitset result;
 
 	size_t i = 0;
@@ -170,16 +164,9 @@ dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 		result.bitset.push_back(sub);
 	}
 
-	compressBitset(&b);
+	compressBitset(&result);
 
 	return result;
-}
-
-dynamic_bitset dynamic_bitset::operator-(uint64_t n)
-{
-	dynamic_bitset b(n);
-
-	return *this - b;
 }
 
 void dynamic_bitset::operator>>(uint64_t n)
@@ -222,12 +209,6 @@ bool dynamic_bitset::operator>(dynamic_bitset second)
 	return first_is_greater;
 }
 
-bool dynamic_bitset::operator>(uint64_t n)
-{
-	dynamic_bitset second(n);
-	return *this > second;
-}
-
 bool dynamic_bitset::operator<(dynamic_bitset second)
 {
 	if(this->bitset.size() != second.bitset.size())
@@ -248,13 +229,6 @@ bool dynamic_bitset::operator<(dynamic_bitset second)
 	return first_is_smaller;
 }
 
-bool dynamic_bitset::operator<(uint64_t n)
-{
-	// convert size_t to dynamic_bitset
-	dynamic_bitset second(n);
-	return *this < second;
-}
-
 bool dynamic_bitset::operator==(dynamic_bitset second)
 {
 	if(this->bitset.size() != second.bitset.size())
@@ -268,13 +242,32 @@ bool dynamic_bitset::operator==(dynamic_bitset second)
 	return true;
 }
 
+bool dynamic_bitset::operator!=(dynamic_bitset second) { return !(*this == second); }
+
+void dynamic_bitset::operator+=(dynamic_bitset b) { *this = *this + b; }
+
+void dynamic_bitset::operator-=(dynamic_bitset b) { *this = *this - b; }
+
+void dynamic_bitset::operator=(dynamic_bitset b) { this->bitset = b.bitset; }
+
+bool dynamic_bitset::operator>(uint64_t n)
+{
+	dynamic_bitset second(n);
+	return *this > second;
+}
+
+bool dynamic_bitset::operator<(uint64_t n)
+{
+	// convert size_t to dynamic_bitset
+	dynamic_bitset second(n);
+	return *this < second;
+}
+
 bool dynamic_bitset::operator==(uint64_t n)
 {
 	dynamic_bitset second(n);
 	return *this == second;
 }
-
-bool dynamic_bitset::operator!=(dynamic_bitset second) { return !(*this == second); }
 
 bool dynamic_bitset::operator!=(uint64_t n)
 {
@@ -282,15 +275,11 @@ bool dynamic_bitset::operator!=(uint64_t n)
 	return *this != second;
 }
 
-void dynamic_bitset::operator+=(dynamic_bitset b) { *this = *this + b; }
-
 void dynamic_bitset::operator+=(uint64_t n)
 {
 	dynamic_bitset b(n);
 	*this = *this + b;
 }
-
-void dynamic_bitset::operator-=(dynamic_bitset b) { *this = *this - b; }
 
 void dynamic_bitset::operator-=(uint64_t n)
 {
@@ -298,10 +287,21 @@ void dynamic_bitset::operator-=(uint64_t n)
 	*this = *this - b;
 }
 
-void dynamic_bitset::operator=(dynamic_bitset b) { this->bitset = b.bitset; }
-
 void dynamic_bitset::operator=(uint64_t n)
 {
 	dynamic_bitset b(n);
 	this->bitset = b.bitset;
+}
+
+dynamic_bitset dynamic_bitset::operator+(uint64_t n)
+{
+	dynamic_bitset b(n);
+	return *this + b;
+}
+
+dynamic_bitset dynamic_bitset::operator-(uint64_t n)
+{
+	dynamic_bitset b(n);
+
+	return *this - b;
 }

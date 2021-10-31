@@ -8,16 +8,16 @@ class dynamic_bitset
 {
   private:
 	std::vector<bool> bitset;
-	void normalizeBitsets(dynamic_bitset *b);
-	void compressBitset(dynamic_bitset *b);
+	void normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b);
+	void compressBitset(dynamic_bitset* b);
 	void compressBitset();
 
   public:
 	dynamic_bitset() {}
 	dynamic_bitset(uint64_t number);
 	std::vector<bool> getBitset() { return this->bitset; }
-	
-    /**
+
+	/**
      * TODO: flip de 1 do mais significativo vira 0. remover 0?
     */
 	void flip(size_t index);
@@ -46,7 +46,6 @@ class dynamic_bitset
 	void operator-=(uint64_t n);
 	void operator=(dynamic_bitset b);
 	void operator=(uint64_t n);
-
 };
 
 #endif
