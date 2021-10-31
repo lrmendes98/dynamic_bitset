@@ -8,6 +8,9 @@ class dynamic_bitset
 {
   private:
 	std::vector<bool> bitset;
+	void normalizeBitsets(dynamic_bitset *b);
+	void compressBitset(dynamic_bitset *b);
+	void compressBitset();
 
   public:
 	dynamic_bitset() {}

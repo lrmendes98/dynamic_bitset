@@ -2,6 +2,46 @@
 
 #define MASK(N) (0x1ull << N)
 
+void dynamic_bitset::compressBitset()
+{
+	size_t aux = this->bitset.size() - 1;
+	while(this->bitset[aux] == 0) {
+		this->bitset.pop_back();
+		--aux;
+	}
+
+	return;
+}
+
+void dynamic_bitset::compressBitset(dynamic_bitset *b)
+{
+	size_t aux = b->bitset.size() - 1;
+	while(b->bitset[aux] == 0) {
+		b->bitset.pop_back();
+		--aux;
+	}
+
+	return;
+}
+
+void dynamic_bitset::normalizeBitsets(dynamic_bitset *b)
+{
+	// convert both binaries to the same size
+	size_t diff = this->bitset.size() - b->bitset.size();
+	if(diff < 0)
+		while(diff > 0) {
+			this->bitset.push_back(0);
+			--diff;
+		}
+	else
+		while(diff > 0) {
+			b->bitset.push_back(0);
+			--diff;
+		}
+
+	return;
+}
+
 dynamic_bitset::dynamic_bitset(uint64_t number)
 {
 	if(number == 0)
@@ -100,30 +140,43 @@ dynamic_bitset dynamic_bitset::operator+(uint64_t n)
 
 dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 {
+	normalizeBitsets(&b);
+	
 	dynamic_bitset result;
 
 	size_t i = 0;
 	bool borrow = false;
+
+	b.printBitset();
+	this->printBitset();
+
 	for(; i < b.bitset.size() || i < this->bitset.size(); ++i) {
-		bool sub = (this->bitset[i] ^ b[i]) ^ borrow;
-		borrow = (!this->bitset[i] && b[i]) || (!this->bitset[i] && borrow) ||
-				 (b[i] && borrow);
+		bool sub = (this->bitset[i] ^ b.bitset[i]) ^ borrow;
+
+		std::cout << "this->bitset[i]: " << this->bitset[i]
+				  << "  b.bitset[i]: " << b.bitset[i] << "  borrow: " << borrow
+				  << std::endl
+				  << std::endl;
+
+		borrow = (!this->bitset[i] && b.bitset[i]) || (!this->bitset[i] && borrow) ||
+				 (b.bitset[i] && borrow);
 		result.bitset.push_back(sub);
 	}
 	// last borrow
 	if(borrow) {
-		bool sub = (this->bitset[i] ^ b[i]) ^ borrow;
-		borrow = (!this->bitset[i] && b[i]) || (!this->bitset[i] && borrow) ||
-				 (b[i] && borrow);
+		bool sub = (this->bitset[i] ^ b.bitset[i]) ^ borrow;
+		borrow = (!this->bitset[i] && b.bitset[i]) || (!this->bitset[i] && borrow) ||
+				 (b.bitset[i] && borrow);
 		result.bitset.push_back(sub);
 	}
+
+	compressBitset(&b);
 
 	return result;
 }
 
 dynamic_bitset dynamic_bitset::operator-(uint64_t n)
 {
-	dynamic_bitset result;
 	dynamic_bitset b(n);
 
 	return *this - b;
@@ -245,10 +298,7 @@ void dynamic_bitset::operator-=(uint64_t n)
 	*this = *this - b;
 }
 
-void dynamic_bitset::operator=(dynamic_bitset b)
-{
-	this->bitset = b.bitset;
-}
+void dynamic_bitset::operator=(dynamic_bitset b) { this->bitset = b.bitset; }
 
 void dynamic_bitset::operator=(uint64_t n)
 {
