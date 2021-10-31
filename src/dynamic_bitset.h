@@ -28,7 +28,7 @@ class dynamic_bitset
 	dynamic_bitset operator-(uint64_t n);
 	void operator>>(uint64_t n);
 	void operator<<(uint64_t n);
-	std::vector<bool>::reference operator[](uint64_t n);
+	std::vector<bool>::reference operator[](size_t n);
 	bool operator>(dynamic_bitset second) const;
 	bool operator>(uint64_t n) const;
 	bool operator<(dynamic_bitset second) const;

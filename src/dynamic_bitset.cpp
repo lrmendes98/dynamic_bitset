@@ -7,7 +7,7 @@ using namespace std;
 void dynamic_bitset::compressBitset()
 {
 	size_t aux = this->bitset.size() - 1;
-	while(this->bitset[aux] == 0) {
+	while(this->bitset[aux] == 0 && aux > 1) {
 		this->bitset.pop_back();
 		--aux;
 	}
@@ -115,27 +115,36 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 
 	dynamic_bitset result;
 
-	this->printBitset();
-	b.printBitset();
+	// this->printBitset();
+	// b.printBitset();
 
 	size_t i = 0;
 	bool carry = false;
-	for(; i < b.bitset.size() || i < this->bitset.size(); ++i) {
+	for(; i < this->bitset.size(); ++i) {
 		bool sum = (this->bitset[i] ^ b[i]) ^ carry;
-		carry = (this->bitset[i] && b[i]) || (this->bitset[i] && carry) ||
-				(b[i] && carry);
+		cout << "this->bitset: " << this->bitset[i] << "\nb[i]: " << b[i]
+			 << "\ncarry: " << carry << "\ni: " << i << "\nsum: " << sum << endl;
+		carry = (&this[i] && b[i]) || (&this[i] && carry) || (b[i] && carry);
 		result.bitset.push_back(sum);
 	}
+
+	--i;
+
+	cout << "this-> : ";
+	this->printBitset();
+	cout << endl;
+	b.printBitset();
+
 	// last carry
 	if(carry) {
-		bool sum = (this->bitset[i] ^ b.bitset[i]) ^ carry;
-		carry = (this->bitset[i] && b.bitset[i]) || (this->bitset[i] && carry) ||
-				(b.bitset[i] && carry);
+		bool sum = (this->bitset[i] ^ b[i]) ^ carry;
+		cout << "this->bitset: " << this->bitset[i] << "\nb[i]: " << b[i]
+			 << "\ncarry: " << carry << "\ni: " << i << "\nsum: " << sum << endl;
 		result.bitset.push_back(sum);
 	}
 
-	compressBitset(&result);
-
+	// compressBitset(&result);
+	result.printBitset();
 	return result;
 }
 
@@ -182,8 +191,10 @@ void dynamic_bitset::operator<<(uint64_t n)
 	}
 }
 
-std::vector<bool>::reference dynamic_bitset::operator[](uint64_t n)
+std::vector<bool>::reference dynamic_bitset::operator[](size_t n)
 {
+	// if(n >= this->bitset.size())
+	// 	throw std::invalid_argument("bitset [] access out of bounds!");
 	return this->bitset[n];
 }
 
