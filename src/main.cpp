@@ -23,8 +23,8 @@ int main()
 	// }
 
 	dynamic_bitset a1 = 5;
-	dynamic_bitset a2 = 3;
-	dynamic_bitset a3 = a1 + a2;
+	dynamic_bitset a2 = 4;
+	// dynamic_bitset a3 = a1 + a2;
 	// dynamic_bitset a4 = a1 + a2;
 	// dynamic_bitset a5 = a1 + a2;
 
@@ -32,7 +32,7 @@ int main()
 	// a4.printBitset();
 	// a5.printBitset();
 
-	cout << (a1 + a2).to_ullong() << endl;
+	cout << (a1 - a2).to_ullong() << endl;
 
 	return 0;
 }

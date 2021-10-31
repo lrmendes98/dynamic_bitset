@@ -18,7 +18,7 @@ void dynamic_bitset::compressBitset()
 void dynamic_bitset::compressBitset(dynamic_bitset* b)
 {
 	size_t aux = b->bitset.size() - 1;
-	while(b->bitset[aux] == 0) {
+	while(this->bitset[aux] == 0 && aux > 1) {
 		b->bitset.pop_back();
 		--aux;
 	}
@@ -115,36 +115,22 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 
 	dynamic_bitset result;
 
-	// this->printBitset();
-	// b.printBitset();
-
 	size_t i = 0;
 	bool carry = false;
 	for(; i < this->bitset.size(); ++i) {
 		bool sum = (this->bitset[i] ^ b[i]) ^ carry;
-		cout << "this->bitset: " << this->bitset[i] << "\nb[i]: " << b[i]
-			 << "\ncarry: " << carry << "\ni: " << i << "\nsum: " << sum << endl;
-		carry = (&this[i] && b[i]) || (&this[i] && carry) || (b[i] && carry);
+		carry = (this->bitset[i] && b[i]) || (this->bitset[i] && carry) ||
+				(b[i] && carry);
+		cout << this->bitset[i] << " " << b[i] << " " << carry << endl;
 		result.bitset.push_back(sum);
 	}
-
-	--i;
-
-	cout << "this-> : ";
-	this->printBitset();
-	cout << endl;
-	b.printBitset();
 
 	// last carry
-	if(carry) {
-		bool sum = (this->bitset[i] ^ b[i]) ^ carry;
-		cout << "this->bitset: " << this->bitset[i] << "\nb[i]: " << b[i]
-			 << "\ncarry: " << carry << "\ni: " << i << "\nsum: " << sum << endl;
-		result.bitset.push_back(sum);
-	}
+	if(carry)
+		result.bitset.push_back(carry);
 
-	// compressBitset(&result);
-	result.printBitset();
+	compressBitset(&result);
+
 	return result;
 }
 
@@ -165,9 +151,7 @@ dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 	}
 	// last borrow
 	if(borrow) {
-		bool sub = (this->bitset[i] ^ b.bitset[i]) ^ borrow;
-		borrow = (!this->bitset[i] && b.bitset[i]) || (!this->bitset[i] && borrow) ||
-				 (b.bitset[i] && borrow);
+		bool sub = this->bitset[i] ^ b.bitset[i];
 		result.bitset.push_back(sub);
 	}
 
@@ -193,8 +177,8 @@ void dynamic_bitset::operator<<(uint64_t n)
 
 std::vector<bool>::reference dynamic_bitset::operator[](size_t n)
 {
-	// if(n >= this->bitset.size())
-	// 	throw std::invalid_argument("bitset [] access out of bounds!");
+	if(n >= this->bitset.size())
+		throw std::invalid_argument("bitset [] access out of bounds!");
 	return this->bitset[n];
 }
 
