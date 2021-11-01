@@ -72,18 +72,21 @@ uint64_t dynamic_bitset::to_ullong() const
 	return result;
 }
 
-void dynamic_bitset::printBitset() const
+string dynamic_bitset::printBitset() const
 {
+	string output;
 	for(size_t i = this->bitset.size(); i > 0; i--) {
-		std::cout << this->bitset[i - 1];
+		output += this->bitset[i - 1];
 	}
 
-	if(this->bitset.size() <= 64)
-		std::cout << " -> " << this->to_ullong();
+	if(this->bitset.size() <= 64){
+		output += " -> ";
+		output += this->to_ullong();
+	}
 	else
-		std::cout << "-> Inf ";
+		output +=  "-> Inf ";
 
-	std::cout << std::endl;
+	return output;
 }
 
 void dynamic_bitset::flip(size_t index)

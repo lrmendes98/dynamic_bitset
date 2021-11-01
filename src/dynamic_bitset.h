@@ -2,12 +2,12 @@
 #define DYNAMICBITSET_H
 
 #include <iostream>
+#include <string>
 #include <vector>
 
 class dynamic_bitset
 {
   private:
-
   public:
 	std::vector<bool> bitset;
 	void normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b);
@@ -20,7 +20,7 @@ class dynamic_bitset
 	void flip(size_t index);
 	bool test(size_t index) const;
 	uint64_t to_ullong() const;
-	void printBitset() const;
+	std::string printBitset() const;
 
 	dynamic_bitset operator+(dynamic_bitset b);
 	dynamic_bitset operator+(uint64_t n);
