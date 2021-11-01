@@ -76,15 +76,14 @@ string dynamic_bitset::printBitset() const
 {
 	string output;
 	for(size_t i = this->bitset.size(); i > 0; i--) {
-		output += this->bitset[i - 1];
+		output += to_string(this->bitset[i - 1]);
 	}
 
-	if(this->bitset.size() <= 64){
+	if(this->bitset.size() <= 64) {
 		output += " -> ";
-		output += this->to_ullong();
-	}
-	else
-		output +=  "-> Inf ";
+		output += to_string(this->to_ullong());
+	} else
+		output += "-> Inf ";
 
 	return output;
 }
@@ -137,7 +136,7 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 
 dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 {
-	normalizeBitsets(this, &b);
+	// normalizeBitsets(this, &b);
 
 	dynamic_bitset result;
 
@@ -156,7 +155,7 @@ dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 		result.bitset.push_back(sub);
 	}
 
-	compressBitset(&result);
+	// compressBitset(&result);
 
 	return result;
 }

@@ -33,7 +33,7 @@ void assert(uint64_t b, uint64_t expected, string testName)
 
 void assert(dynamic_bitset b, uint64_t expected, string testName)
 {
-	if(b != expected) {
+	if(b.to_ullong() != expected) {
 		cerr << printRedBold("Error in " + testName) << endl;
 		cerr << "Received: " << b.printBitset() << endl;
 		cerr << "Expected: " << expected << endl;
@@ -48,15 +48,16 @@ void testSub()
 	std::srand(std::time(0));
 
 	// simple tests
-	{
-		dynamic_bitset aux = 0;
-		aux -= 0;
-		assert(aux, 0, "testSub 1");
-		cout << printGreenBold("Pass testSub 1") << endl << endl;
-	}
+	// {
+	// 	dynamic_bitset aux = 0;
+	// 	aux -= 0;
+	// 	assert(aux, 0, "testSub 1");
+	// 	cout << printGreenBold("Pass testSub 1") << endl << endl;
+	// }
 	{
 		dynamic_bitset aux = 5;
 		aux -= 4;
+		aux.printBitset();
 		assert(aux, 1, "testSub 2");
 		cout << printGreenBold("Pass testSub 2") << endl << endl;
 	}

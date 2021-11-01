@@ -11,7 +11,7 @@ int main()
 	testSum();
 	testSub();
 	testCompressBitsets();
-	
+
 	cout << endl;
 	return 0;
 }
