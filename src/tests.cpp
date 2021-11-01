@@ -48,12 +48,12 @@ void testSub()
 	std::srand(std::time(0));
 
 	// simple tests
-	// {
-	// 	dynamic_bitset aux = 0;
-	// 	aux -= 0;
-	// 	assert(aux, 0, "testSub 1");
-	// 	cout << printGreenBold("Pass testSub 1") << endl << endl;
-	// }
+	{
+		dynamic_bitset aux = 0;
+		aux -= 0;
+		assert(aux, 0, "testSub 1");
+		cout << printGreenBold("Pass testSub 1") << endl << endl;
+	}
 	{
 		dynamic_bitset aux = 5;
 		aux -= 4;
@@ -69,9 +69,7 @@ void testSub()
 		dynamic_bitset aux = random1;
 
 		aux -= random1;
-
 		uint64_t result = random1 - random1;
-
 		assert(aux, result, "testSub random");
 	}
 
