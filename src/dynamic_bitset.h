@@ -7,12 +7,12 @@
 class dynamic_bitset
 {
   private:
+
+  public:
 	std::vector<bool> bitset;
 	void normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b);
 	void compressBitset(dynamic_bitset* b);
 	void compressBitset();
-
-  public:
 	dynamic_bitset() {}
 	dynamic_bitset(uint64_t number);
 	std::vector<bool> getBitset() const { return this->bitset; }

@@ -6,8 +6,9 @@ using namespace std;
 
 int main()
 {
-	testSum();
-	testSub();
-
+	// testSum();
+	// testSub();
+	testCompressBitsets();
+	
 	return 0;
 }
