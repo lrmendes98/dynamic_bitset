@@ -81,6 +81,22 @@ void testSum()
 		}
 	}
 
+    // not so simple tests
+    // for(int i = 0; i < 2; ++i){
+    //     dynamic_bitset aux = i;
+    //     cout << "hello??????" << endl;
+    //     aux += 2;
+    //     uint64_t result = i + 2;
+
+
+    //     if(result != aux.to_ullong()) {
+	// 		cerr << "Erro em testSum()" << endl;
+	// 		cerr << "Expected: " << result << endl;
+	// 		aux.printBitset();
+	// 		exit(EXIT_FAILURE);
+	// 	}
+    // }
+
 	// random numbers sum
 	for(size_t i = 0; i < ITERATIONS; i++) {
 		uint64_t random1 = 0;

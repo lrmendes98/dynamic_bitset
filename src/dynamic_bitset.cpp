@@ -112,7 +112,6 @@ bool dynamic_bitset::test(size_t index) const
 dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 {
 	normalizeBitsets(this, &b);
-
 	dynamic_bitset result;
 
 	size_t i = 0;
