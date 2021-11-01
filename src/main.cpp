@@ -7,10 +7,7 @@ using namespace std;
 int main()
 {
 	testSum();
-
-	dynamic_bitset aux = 5;
-	aux += 5;
-	aux.printBitset();
+	testSub();
 
 	return 0;
 }

@@ -2,5 +2,7 @@
 #define TESTS_H
 
 void testSum();
+void testSub();
+
 
 #endif
