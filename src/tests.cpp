@@ -5,12 +5,17 @@
 
 using namespace std;
 
-void testCompressBitsets(){
+void testCompressBitsets()
+{
 	dynamic_bitset b = 0;
-	b.bitset.push_back(0);
-	b.printBitset();
+	for(int i = 0; i < ITERATIONS; ++i) {
+		b.bitset.push_back(0);
+	}
 	b.compressBitset();
-	b.printBitset();
+	if(b.getBitset().size() != 1) {
+		cerr << "\033[31mErro em compress bitset\033[0m" << endl;
+	}
+	cout << "\033[32mPass testCompressBitset\033[0m" << endl;
 }
 
 void assert(dynamic_bitset b, uint64_t expected)

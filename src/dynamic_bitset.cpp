@@ -7,7 +7,7 @@ using namespace std;
 void dynamic_bitset::compressBitset()
 {
 	size_t aux = this->bitset.size() - 1;
-	while(this->bitset[aux] == 0 && aux > 1) {
+	while(this->bitset[aux] == 0 && aux > 0) {
 		this->bitset.pop_back();
 		--aux;
 	}
