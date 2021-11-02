@@ -13,10 +13,8 @@ void testCompressBitsets()
 		b.bitset.push_back(0);
 	}
 	dynamic_bitset::compressBitset(&b);
-	if(b.getBitset().size() != 1) {
-		cerr << printRedBold("Erro em compress bitset") << endl;
-	}
-	cout << printGreenBold("Pass testCompressBitset") << endl;
+	assert(b.getBitset().size(), 1, "testCompressBitset");
+	cout << printGreenBold("Pass testCompressBitset") << endl << endl;
 }
 
 void assert(uint64_t b, uint64_t expected, string testName)
