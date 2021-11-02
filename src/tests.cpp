@@ -2,7 +2,7 @@
 #include "consoleUtils.h"
 #include <ctime>
 
-#define ITERATIONS 1000
+#define ITERATIONS 100000
 
 using namespace std;
 
@@ -95,7 +95,7 @@ void testSum()
 	}
 
 	// not so simple tests
-	for(int i = 0; i < 1; ++i) {
+	for(int i = 0; i < ITERATIONS; ++i) {
 		dynamic_bitset aux = i;
 		aux += 2;
 		uint64_t result = i + 2;
