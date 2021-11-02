@@ -17,12 +17,7 @@ void dynamic_bitset::compressBitset(dynamic_bitset* b)
 
 void dynamic_bitset::normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b)
 {
-	/**
-	* convert both binaries to the same size
-	* wow isto pode ser um problema, subtração de numeros maores que ull
-	* brilhante ideia, usar a subtração binária para calcular isto
-	*/
-	int diff = a->bitset.size() - b->bitset.size();
+	int64_t diff = a->bitset.size() - b->bitset.size();
 	if(diff == 0)
 		return;
 	else if(diff < 0)
