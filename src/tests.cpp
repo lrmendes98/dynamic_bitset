@@ -95,12 +95,11 @@ void testSum()
 	}
 
 	// not so simple tests
-	for(int i = 0; i < 1; ++i){
-	    dynamic_bitset aux = i;
-	    aux += 2;
-	    uint64_t result = i + 2;
-
-	    assert(aux, result, "testSum 3");
+	for(int i = 0; i < 1; ++i) {
+		dynamic_bitset aux = i;
+		aux += 2;
+		uint64_t result = i + 2;
+		assert(aux, result, "testSum 3");
 	}
 
 	// random numbers sum

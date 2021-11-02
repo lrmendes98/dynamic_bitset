@@ -28,14 +28,18 @@ void dynamic_bitset::compressBitset(dynamic_bitset* b)
 
 void dynamic_bitset::normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b)
 {
-	// convert both binaries to the same size
-	size_t diff = a->bitset.size() - b->bitset.size();
+	/**
+	* convert both binaries to the same size
+	* wow isto pode ser um problema, subtração de numeros maores que ull
+	* brilhante ideia, usar a subtração binária para calcular isto
+	*/
+	int diff = a->bitset.size() - b->bitset.size();
 	if(diff == 0)
 		return;
 	else if(diff < 0)
-		while(diff > 0) {
+		while(diff < 0) {
 			a->bitset.push_back(0);
-			--diff;
+			++diff;
 		}
 	else
 		while(diff > 0) {
@@ -113,10 +117,8 @@ bool dynamic_bitset::test(size_t index) const
 
 dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 {
-	// normalizeBitsets(this, &b);
+	normalizeBitsets(this, &b);
 	dynamic_bitset result;
-
-	b.printBitset();
 
 	size_t i = 0;
 	bool carry = false;
@@ -124,7 +126,6 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 		bool sum = (this->bitset[i] ^ b[i]) ^ carry;
 		carry = (this->bitset[i] && b[i]) || (this->bitset[i] && carry) ||
 				(b[i] && carry);
-		cout << sum << endl;
 		result.bitset.push_back(sum);
 	}
 
@@ -132,14 +133,14 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 	if(carry)
 		result.bitset.push_back(carry);
 
-	// compressBitset(&result);
+	compressBitset(&result);
 
 	return result;
 }
 
 dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 {
-	// normalizeBitsets(this, &b);
+	normalizeBitsets(this, &b);
 
 	dynamic_bitset result;
 
@@ -158,7 +159,7 @@ dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b)
 		result.bitset.push_back(sub);
 	}
 
-	// compressBitset(&result);
+	compressBitset(&result);
 
 	return result;
 }

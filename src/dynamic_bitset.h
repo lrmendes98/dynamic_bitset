@@ -10,7 +10,7 @@ class dynamic_bitset
   private:
   public:
 	std::vector<bool> bitset;
-	void normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b);
+	static void normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b);
 	void compressBitset(dynamic_bitset* b);
 	void compressBitset();
 	dynamic_bitset() {}
