@@ -2,6 +2,7 @@
 #define TESTS_H
 #include "dynamic_bitset.h"
 
+void testNormalizeBitsets();
 void testCompressBitsets();
 void testSum();
 void testSub();

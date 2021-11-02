@@ -8,10 +8,11 @@ using namespace std;
 int main()
 {
 	clear();
-	
+
 	testSum();
 	testSub();
 	testCompressBitsets();
+	testNormalizeBitsets();
 
 	cout << endl;
 	return 0;

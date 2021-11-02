@@ -1,11 +1,29 @@
 #include "tests.h"
 #include "consoleUtils.h"
+#include "dynamic_bitset.h"
 #include <climits>
 #include <ctime>
 
 #define ITERATIONS 100000
 
 using namespace std;
+
+void testNormalizeBitsets()
+{
+	{
+		dynamic_bitset b1 = 0;
+		dynamic_bitset b2 = 0;
+		for(int i = 0; i < ITERATIONS; ++i) {
+			b1.bitset.push_back(0);
+			b2.bitset.push_back(0);
+		}
+		dynamic_bitset::normalizeBitsets(&b1, &b2);
+		assert(b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 1");
+	}
+
+	cout << printGreenBold("Pass testNormalizeBitsets") << endl << endl;
+	return;
+}
 
 void testCompressBitsets()
 {
