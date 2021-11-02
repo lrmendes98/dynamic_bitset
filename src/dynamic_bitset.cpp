@@ -17,6 +17,10 @@ void dynamic_bitset::compressBitset(dynamic_bitset* b)
 
 void dynamic_bitset::normalizeBitsets(dynamic_bitset* a, dynamic_bitset* b)
 {
+	/**
+	* Here is a limitation of the representation of dynamic_bitset numbers
+	* Maybe use dynamic_bitset subtraction?
+	*/
 	int64_t diff = a->bitset.size() - b->bitset.size();
 	if(diff == 0)
 		return;
