@@ -22,25 +22,25 @@ class dynamic_bitset
 	std::string printBitset() const;
 
 	dynamic_bitset operator+(dynamic_bitset b);
-	dynamic_bitset operator+(uint64_t n);
 	dynamic_bitset operator-(dynamic_bitset b);
-	dynamic_bitset operator-(uint64_t n);
 	void operator>>(uint64_t n);
 	void operator<<(uint64_t n);
 	std::vector<bool>::reference operator[](size_t n);
 	bool operator>(dynamic_bitset second) const;
-	bool operator>(uint64_t n) const;
 	bool operator<(dynamic_bitset second) const;
-	bool operator<(uint64_t n) const;
 	bool operator==(dynamic_bitset second) const;
-	bool operator==(uint64_t n) const;
 	bool operator!=(dynamic_bitset second) const;
-	bool operator!=(uint64_t n) const;
 	void operator+=(dynamic_bitset b);
-	void operator+=(uint64_t n);
 	void operator-=(dynamic_bitset b);
-	void operator-=(uint64_t n);
 	void operator=(dynamic_bitset b);
+	dynamic_bitset operator+(uint64_t n);
+	dynamic_bitset operator-(uint64_t n);
+	bool operator>(uint64_t n) const;
+	bool operator<(uint64_t n) const;
+	bool operator==(uint64_t n) const;
+	bool operator!=(uint64_t n) const;
+	void operator+=(uint64_t n);
+	void operator-=(uint64_t n);
 	void operator=(uint64_t n);
 };
 

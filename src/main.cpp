@@ -8,6 +8,7 @@ using namespace std;
 int main()
 {
 	clear();
+	
 	testSum();
 	testSub();
 	testCompressBitsets();
