@@ -17,30 +17,6 @@ void testCompressBitsets()
 	cout << printGreenBold("Pass testCompressBitset") << endl << endl;
 }
 
-void assert(uint64_t b, uint64_t expected, string testName)
-{
-	if(b != expected) {
-		cerr << printRedBold("Error in " + testName) << endl;
-		cerr << "Received: " << b << endl;
-		cerr << "Expected: " << expected << endl;
-		exit(EXIT_FAILURE);
-	} else {
-		// cout << printGreenBold("Pass " + testName) << endl;
-	}
-}
-
-void assert(dynamic_bitset b, uint64_t expected, string testName)
-{
-	if(b.to_ullong() != expected) {
-		cerr << printRedBold("Error in " + testName) << endl;
-		cerr << "Received: " << b.printBitset() << endl;
-		cerr << "Expected: " << expected << endl;
-		exit(EXIT_FAILURE);
-	} else {
-		// cout << printGreenBold("Pass " + testName);
-	}
-}
-
 void testSub()
 {
 	std::srand(std::time(0));
@@ -50,14 +26,12 @@ void testSub()
 		dynamic_bitset aux = 0;
 		aux -= 0;
 		assert(aux, 0, "testSub 1");
-		cout << printGreenBold("Pass testSub 1") << endl << endl;
 	}
 	{
 		dynamic_bitset aux = 5;
 		aux -= 4;
 		aux.printBitset();
 		assert(aux, 1, "testSub 2");
-		cout << printGreenBold("Pass testSub 2") << endl << endl;
 	}
 
 	// random numbers sum
@@ -68,10 +42,10 @@ void testSub()
 
 		aux -= random1;
 		uint64_t result = random1 - random1;
-		assert(aux, result, "testSub random");
+		assert(aux, result, "testSub 3");
 	}
 
-	cout << printGreenBold("Pass testSub random") << endl << endl;
+	cout << printGreenBold("Pass testSub") << endl << endl;
 
 	return;
 }
@@ -110,9 +84,33 @@ void testSum()
 
 		uint64_t result = random1 + random1;
 
-		assert(aux, result, "testSum random");
+		assert(aux, result, "testSum 4");
 	}
-	cout << printGreenBold("Pass testSum random") << endl << endl;
+	cout << printGreenBold("Pass testSum") << endl << endl;
 
 	return;
+}
+
+void assert(uint64_t b, uint64_t expected, string testName)
+{
+	if(b != expected) {
+		cerr << printRedBold("Error in " + testName) << endl;
+		cerr << "Received: " << b << endl;
+		cerr << "Expected: " << expected << endl;
+		exit(EXIT_FAILURE);
+	} else {
+		// cout << printGreenBold("Pass " + testName) << endl;
+	}
+}
+
+void assert(dynamic_bitset b, uint64_t expected, string testName)
+{
+	if(b.to_ullong() != expected) {
+		cerr << printRedBold("Error in " + testName) << endl;
+		cerr << "Received: " << b.printBitset() << endl;
+		cerr << "Expected: " << expected << endl;
+		exit(EXIT_FAILURE);
+	} else {
+		// cout << printGreenBold("Pass " + testName);
+	}
 }
