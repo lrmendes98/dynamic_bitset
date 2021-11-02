@@ -18,7 +18,8 @@ void testNormalizeBitsets()
 			b2.bitset.push_back(0);
 		}
 		dynamic_bitset::normalizeBitsets(&b1, &b2);
-		assert(b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 1");
+		assert(
+			b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 1");
 		assert(b1.to_ullong(), 0, "testNormalizeBitsets 1.1");
 		assert(b2.to_ullong(), 1, "testNormalizeBitsets 1.2");
 	}
@@ -30,7 +31,8 @@ void testNormalizeBitsets()
 			b2.bitset.push_back(0);
 		}
 		dynamic_bitset::normalizeBitsets(&b1, &b2);
-		assert(b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 2");
+		assert(
+			b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 2");
 		assert(b1.to_ullong(), 123123, "testNormalizeBitsets 2.1");
 		assert(b2.to_ullong(), 987654321, "testNormalizeBitsets 2.2");
 	}
@@ -42,9 +44,10 @@ void testNormalizeBitsets()
 			b2.bitset.push_back(0);
 		}
 		dynamic_bitset::normalizeBitsets(&b1, &b2);
-		assert(b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 2");
-		assert(b1.to_ullong(), 987654321, "testNormalizeBitsets 2.1");
-		assert(b2.to_ullong(), 10, "testNormalizeBitsets 2.2");
+		assert(
+			b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 3");
+		assert(b1.to_ullong(), 987654321, "testNormalizeBitsets 3.1");
+		assert(b2.to_ullong(), 10, "testNormalizeBitsets 3.2");
 	}
 	{
 		dynamic_bitset b1 = 987654321;
@@ -54,9 +57,23 @@ void testNormalizeBitsets()
 			b2.bitset.push_back(0);
 		}
 		dynamic_bitset::normalizeBitsets(&b1, &b2);
-		assert(b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 2");
-		assert(b1.to_ullong(), 987654321, "testNormalizeBitsets 2.1");
-		assert(b2.to_ullong(), 987654321, "testNormalizeBitsets 2.2");
+		assert(
+			b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 4");
+		assert(b1.to_ullong(), 987654321, "testNormalizeBitsets 4.1");
+		assert(b2.to_ullong(), 987654321, "testNormalizeBitsets 4.2");
+	}
+	{
+		dynamic_bitset b1 = 987654321;
+		dynamic_bitset b2 = 987654321;
+		for(int i = 0; i < 20; ++i) {
+			b1.bitset.push_back(0);
+			b2.bitset.push_back(0);
+		}
+		dynamic_bitset::normalizeBitsets(&b1, &b2);
+		assert(
+			b1.getBitset().size(), b1.getBitset().size(), "testNormalizeBitsets 4");
+		assert(b1.to_ullong(), 987654321, "testNormalizeBitsets 4.1");
+		assert(b2.to_ullong(), 987654321, "testNormalizeBitsets 4.2");
 	}
 
 	cout << printGreenBold("Pass testNormalizeBitsets") << endl << endl;
@@ -161,9 +178,8 @@ void testSum()
 	// not so simple tests
 	for(int i = 0; i < ITERATIONS; ++i) {
 		dynamic_bitset aux = i;
-		aux += 2;
-		uint64_t result = i + 2;
-		assert(aux, result, "testSum 3");
+		aux += ITERATIONS;
+		assert(aux, ITERATIONS + i, "testSum 3");
 	}
 
 	// random numbers sum
