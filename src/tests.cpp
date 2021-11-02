@@ -1,5 +1,6 @@
 #include "tests.h"
 #include "consoleUtils.h"
+#include <climits>
 #include <ctime>
 
 #define ITERATIONS 100000
@@ -8,12 +9,47 @@ using namespace std;
 
 void testCompressBitsets()
 {
-	dynamic_bitset b = 0;
-	for(int i = 0; i < ITERATIONS; ++i) {
-		b.bitset.push_back(0);
+	{
+		dynamic_bitset b = 0;
+		for(int i = 0; i < ITERATIONS; ++i) {
+			b.bitset.push_back(0);
+		}
+		dynamic_bitset::compressBitset(&b);
+		assert(b.getBitset().size(), 1, "testCompressBitset 1");
 	}
-	dynamic_bitset::compressBitset(&b);
-	assert(b.getBitset().size(), 1, "testCompressBitset");
+	{
+		dynamic_bitset b = 1;
+		for(int i = 0; i < ITERATIONS; ++i) {
+			b.bitset.push_back(0);
+		}
+		dynamic_bitset::compressBitset(&b);
+		assert(b.to_ullong(), 1, "testCompressBitset 2");
+	}
+	{
+		for(uint64_t i = 0; i < ITERATIONS; i++) {
+			dynamic_bitset b = i;
+
+			for(int i = 0; i < 100; ++i) {
+				b.bitset.push_back(0);
+			}
+
+			dynamic_bitset::compressBitset(&b);
+
+			assert(b.to_ullong(), i, "testCompressBitset 3");
+		}
+	}
+	{
+		dynamic_bitset b = ULLONG_MAX;
+
+		for(int i = 0; i < ITERATIONS; ++i) {
+			b.bitset.push_back(0);
+		}
+
+		dynamic_bitset::compressBitset(&b);
+
+		assert(b.to_ullong(), ULLONG_MAX, "testCompressBitset 4");
+	}
+
 	cout << printGreenBold("Pass testCompressBitset") << endl << endl;
 }
 
