@@ -7,9 +7,9 @@ using namespace std;
 
 int main()
 {
-	// clear();
-	// testSum();
-	// testSub();
+	clear();
+	testSum();
+	testSub();
 	testCompressBitsets();
 
 	cout << endl;

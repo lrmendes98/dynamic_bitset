@@ -13,7 +13,6 @@ void testCompressBitsets()
 		b.bitset.push_back(0);
 	}
 	dynamic_bitset::compressBitset(&b);
-	cout << b.printBitset() << endl;
 	if(b.getBitset().size() != 1) {
 		cerr << printRedBold("Erro em compress bitset") << endl;
 	}
