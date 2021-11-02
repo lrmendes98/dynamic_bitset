@@ -4,21 +4,10 @@
 
 using namespace std;
 
-void dynamic_bitset::compressBitset()
-{
-	size_t aux = this->bitset.size() - 1;
-	while(this->bitset[aux] == 0 && aux > 0) {
-		this->bitset.pop_back();
-		--aux;
-	}
-
-	return;
-}
-
 void dynamic_bitset::compressBitset(dynamic_bitset* b)
 {
 	size_t aux = b->bitset.size() - 1;
-	while(b->bitset[aux] == 0 && aux > 1) {
+	while(b->bitset[aux] == 0 && aux > 0) {
 		b->bitset.pop_back();
 		--aux;
 	}
@@ -104,7 +93,7 @@ void dynamic_bitset::flip(size_t index)
 	bitset[index] = !bitset[index];
 
 	if(bitset[index] == 0) {
-		this->compressBitset();
+		compressBitset(this);
 	}
 }
 
