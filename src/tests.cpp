@@ -8,6 +8,19 @@
 
 using namespace std;
 
+void checkCompressedBitset(dynamic_bitset b)
+{
+	if(b.getBitset().size() != 1) {
+		if(b.getBitset()[b.getBitset().size() - 1] == 0) {
+			cerr << printRedBold("Error: bitset not compressed!") << endl;
+			cerr << b.printBitset() << endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	return;
+}
+
 void testNormalizeBitsets()
 {
 	{
@@ -121,6 +134,7 @@ void testCompressBitsets()
 		dynamic_bitset::compressBitset(&b);
 
 		assert(b.to_ullong(), ULLONG_MAX, "testCompressBitset 4");
+		checkCompressedBitset(b);
 	}
 
 	cout << printGreenBold("Pass testCompressBitset") << endl << endl;
@@ -135,12 +149,14 @@ void testSub()
 		dynamic_bitset aux = 0;
 		aux -= 0;
 		assert(aux, 0, "testSub 1");
+		checkCompressedBitset(aux);
 	}
 	{
 		dynamic_bitset aux = 5;
 		aux -= 4;
 		aux.printBitset();
 		assert(aux, 1, "testSub 2");
+		checkCompressedBitset(aux);
 	}
 
 	// random numbers sum
@@ -152,6 +168,7 @@ void testSub()
 		aux -= random1;
 		uint64_t result = random1 - random1;
 		assert(aux, result, "testSub 3");
+		checkCompressedBitset(aux);
 	}
 
 	cout << printGreenBold("Pass testSub") << endl << endl;
@@ -168,11 +185,13 @@ void testSum()
 		dynamic_bitset aux = 0;
 		aux += 0;
 		assert(aux, 0, "testSum 1");
+		checkCompressedBitset(aux);
 	}
 	{
 		dynamic_bitset aux = 5;
 		aux += 4;
 		assert(aux, 9, "testSum 2");
+		checkCompressedBitset(aux);
 	}
 
 	// not so simple tests
@@ -180,6 +199,7 @@ void testSum()
 		dynamic_bitset aux = i;
 		aux += ITERATIONS;
 		assert(aux, ITERATIONS + i, "testSum 3");
+		checkCompressedBitset(aux);
 	}
 
 	// random numbers sum
@@ -193,6 +213,7 @@ void testSum()
 		uint64_t result = random1 + random1;
 
 		assert(aux, result, "testSum 4");
+		checkCompressedBitset(aux);
 	}
 	cout << printGreenBold("Pass testSum") << endl << endl;
 
