@@ -86,22 +86,22 @@ void testSum()
 	{
 		dynamic_bitset aux = 0;
 		aux += 0;
-		assert(aux, 0, "testSum simple1");
+		assert(aux, 0, "testSum 1");
 	}
 	{
 		dynamic_bitset aux = 5;
 		aux += 4;
-		assert(aux, 9, "testSum simple2");
+		assert(aux, 9, "testSum 2");
 	}
 
 	// not so simple tests
-	// for(int i = 0; i < 2; ++i){
-	//     dynamic_bitset aux = i;
-	//     aux += 2;
-	//     uint64_t result = i + 2;
+	for(int i = 0; i < 1; ++i){
+	    dynamic_bitset aux = i;
+	    aux += 2;
+	    uint64_t result = i + 2;
 
-	//     assert(aux, result);
-	// }
+	    assert(aux, result, "testSum 3");
+	}
 
 	// random numbers sum
 	for(size_t i = 0; i < ITERATIONS; i++) {

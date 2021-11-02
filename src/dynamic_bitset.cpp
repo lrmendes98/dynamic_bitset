@@ -116,12 +116,15 @@ dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b)
 	// normalizeBitsets(this, &b);
 	dynamic_bitset result;
 
+	b.printBitset();
+
 	size_t i = 0;
 	bool carry = false;
 	for(; i < this->bitset.size(); ++i) {
 		bool sum = (this->bitset[i] ^ b[i]) ^ carry;
 		carry = (this->bitset[i] && b[i]) || (this->bitset[i] && carry) ||
 				(b[i] && carry);
+		cout << sum << endl;
 		result.bitset.push_back(sum);
 	}
 
