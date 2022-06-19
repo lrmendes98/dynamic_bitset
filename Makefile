@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -c -std=c++17 -O2
+CXXFLAGS = -std=c++17 -Wall -c -pipe -O2
 PROJ_NAME = main
 
 OBJS_DIR := obj
