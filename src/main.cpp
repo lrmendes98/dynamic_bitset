@@ -8,12 +8,11 @@ using namespace std;
 int main()
 {
 	clear();
+
 	testSum();
 	testSub();
-	// testCompressBitsets();
-
-	// dynamic_bitset aux = 0;
-	// dynamic_bitset state = aux + 15;
+	testCompressBitsets();
+	testNormalizeBitsets();
 
 	
 	// // aux += 2;

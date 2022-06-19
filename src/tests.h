@@ -2,10 +2,12 @@
 #define TESTS_H
 #include "dynamic_bitset.h"
 
+void testNormalizeBitsets();
 void testCompressBitsets();
-void assert(dynamic_bitset b, uint64_t expected, std::string testName);
-void assert(uint64_t b, uint64_t expected, std::string testName);
 void testSum();
 void testSub();
+void checkCompressedBitset(dynamic_bitset b);
+void assert(dynamic_bitset b, uint64_t expected, std::string testName);
+void assert(uint64_t b, uint64_t expected, std::string testName);
 
 #endif
