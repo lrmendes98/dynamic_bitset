@@ -94,7 +94,7 @@ string dynamic_bitset::printBitsetFormatted() const
 	return output;
 }
 
-void dynamic_bitset::flip(const size_t &index)
+void dynamic_bitset::flip(const size_t& index)
 {
 	if(index >= this->bitset.size()) {
 		// add 0's while size() - index
@@ -110,30 +110,27 @@ void dynamic_bitset::flip(const size_t &index)
 	}
 }
 
-bool dynamic_bitset::test(const size_t &index) const
+bool dynamic_bitset::test(const size_t& index) const
 {
 	if(index >= this->bitset.size())
 		return false;
-	
-	return this->bitset[index] == 1;
 
-	// try {
-	// 	return this->bitset.at(index);
-	// } catch (std::out_of_range const& exc) {
-	// 	return false;
-	// }
+	return this->bitset[index] == 1;
 }
+
+void dynamic_bitset::operator=(const dynamic_bitset& b) { this->bitset = b.bitset; }
 
 dynamic_bitset dynamic_bitset::operator+(dynamic_bitset b) const
 {
-	dynamic_bitset a = *this;
+	dynamic_bitset a = this->bitset;
 	normalizeBitsets(&a, &b);
 	dynamic_bitset result;
 
 	bool carry = false;
 	for(size_t i = 0; i < a.bitset.size(); ++i) {
 		bool sum = (a.bitset[i] ^ b.bitset[i]) ^ carry;
-		carry = (a.bitset[i] && b.bitset[i]) || (a.bitset[i] && carry) || (b.bitset[i] && carry);
+		carry = (a.bitset[i] && b.bitset[i]) || (a.bitset[i] && carry) ||
+				(b.bitset[i] && carry);
 		result.bitset.push_back(sum);
 	}
 
@@ -171,14 +168,14 @@ dynamic_bitset dynamic_bitset::operator-(dynamic_bitset b) const
 	return result;
 }
 
-void dynamic_bitset::operator>>(const uint64_t &n)
+void dynamic_bitset::operator>>(const uint64_t& n)
 {
 	if(this->bitset.size() == 1)
 		return;
 	this->bitset.erase(this->bitset.begin(), this->bitset.begin() + n);
 }
 
-void dynamic_bitset::operator<<(const uint64_t &n)
+void dynamic_bitset::operator<<(const uint64_t& n)
 {
 	auto it = this->bitset.begin();
 
@@ -188,14 +185,14 @@ void dynamic_bitset::operator<<(const uint64_t &n)
 	}
 }
 
-std::vector<bool>::reference dynamic_bitset::operator[](const size_t &n)
+std::vector<bool>::reference dynamic_bitset::operator[](const size_t& n)
 {
 	// if(n >= this->bitset.size())
 	// 	throw std::invalid_argument("bitset [] access out of bounds!");
 	return this->bitset[n];
 }
 
-bool dynamic_bitset::operator>(const dynamic_bitset &second) const
+bool dynamic_bitset::operator>(const dynamic_bitset& second) const
 {
 	if(this->bitset.size() != second.bitset.size())
 		return (this->bitset.size() > second.bitset.size());
@@ -215,7 +212,7 @@ bool dynamic_bitset::operator>(const dynamic_bitset &second) const
 	return first_is_greater;
 }
 
-bool dynamic_bitset::operator<(const dynamic_bitset &second) const
+bool dynamic_bitset::operator<(const dynamic_bitset& second) const
 {
 	if(this->bitset.size() != second.bitset.size())
 		return (this->bitset.size() < second.bitset.size());
@@ -235,17 +232,17 @@ bool dynamic_bitset::operator<(const dynamic_bitset &second) const
 	return first_is_smaller;
 }
 
-bool dynamic_bitset::operator>=(const dynamic_bitset &second) const
+bool dynamic_bitset::operator>=(const dynamic_bitset& second) const
 {
 	return *this > second || *this == second;
 }
 
-bool dynamic_bitset::operator<=(const dynamic_bitset &second) const
+bool dynamic_bitset::operator<=(const dynamic_bitset& second) const
 {
 	return *this < second || *this == second;
 }
 
-bool dynamic_bitset::operator==(const dynamic_bitset &second) const
+bool dynamic_bitset::operator==(const dynamic_bitset& second) const
 {
 	if(this->bitset.size() != second.bitset.size())
 		return false;
@@ -258,16 +255,14 @@ bool dynamic_bitset::operator==(const dynamic_bitset &second) const
 	return true;
 }
 
-bool dynamic_bitset::operator!=(const dynamic_bitset &second) const
+bool dynamic_bitset::operator!=(const dynamic_bitset& second) const
 {
 	return !(*this == second);
 }
 
-void dynamic_bitset::operator+=(const dynamic_bitset &b) { *this = *this + b; }
+void dynamic_bitset::operator+=(const dynamic_bitset& b) { *this = *this + b; }
 
-void dynamic_bitset::operator-=(const dynamic_bitset &b) { *this = *this - b; }
-
-void dynamic_bitset::operator=(const dynamic_bitset &b) { this->bitset = b.bitset; }
+void dynamic_bitset::operator-=(const dynamic_bitset& b) { *this = *this - b; }
 
 bool dynamic_bitset::operator>(uint64_t n) const
 {

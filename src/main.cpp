@@ -1,7 +1,7 @@
+#include "consoleUtils.h"
 #include "dynamic_bitset.h"
 #include "tests.h"
 #include <iostream>
-#include "consoleUtils.h"
 
 using namespace std;
 
@@ -14,7 +14,6 @@ int main()
 	// testCompressBitsets();
 	// testNormalizeBitsets();
 
-	
 	// // aux += 2;
 	// cout << "state: " << state.printBitset() << endl;
 	// cout << "aux: " << aux.printBitset() << endl;
