@@ -7,12 +7,12 @@ using namespace std;
 
 int main()
 {
-	clear();
+	// clear();
 
-	testSum();
-	testSub();
-	testCompressBitsets();
-	testNormalizeBitsets();
+	// testSum();
+	// testSub();
+	// testCompressBitsets();
+	// testNormalizeBitsets();
 
 	
 	// // aux += 2;
